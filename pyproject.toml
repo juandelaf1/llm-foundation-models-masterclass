@@ -1,0 +1,51 @@
+[project]
+name = "llm-foundation-models-masterclass"
+version = "1.0.0"
+description = "Masterclass 'Explorando los LLM por dentro': 60-min teaching experience with slides, notebooks, demos and a Learning RAG."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+dependencies = [
+    "python-dotenv>=1.0",
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+rag = [
+    "llama-index>=0.10",
+    "chromadb>=0.4",
+]
+ui = [
+    "streamlit>=1.30",
+]
+dev = [
+    "pytest>=7.4",
+]
+all = [
+    "llama-index>=0.10",
+    "chromadb>=0.4",
+    "streamlit>=1.30",
+    "pytest>=7.4",
+]
+
+[project.scripts]
+masterclass-rag = "rag.app.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = [
+    "rag",
+    "rag.ingestion",
+    "rag.retrieval",
+    "rag.prompts",
+    "rag.evaluation",
+    "rag.app",
+]

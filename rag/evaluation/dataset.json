@@ -1,0 +1,32 @@
+{
+  "questions": [
+    {"id": "f1", "type": "factual", "question": "¿Qué es la tokenización y por qué un token no equivale siempre a una palabra?"},
+    {"id": "f2", "type": "factual", "question": "¿Qué son los embeddings en el contexto de un LLM?"},
+    {"id": "f3", "type": "factual", "question": "¿Cuáles son los componentes básicos de un bloque Transformer?"},
+    {"id": "f4", "type": "factual", "question": "¿Qué es la generación autoregresiva?"},
+    {"id": "f5", "type": "factual", "question": "¿Qué significa open-weight y cómo difiere de open source?"},
+    {"id": "f6", "type": "factual", "question": "¿Qué proveedores o familias se cubren en el ecosistema de la masterclass?"},
+    {"id": "f7", "type": "factual", "question": "¿Cuál es la duración máxima de la sesión núcleo de la masterclass?"},
+    {"id": "f8", "type": "factual", "question": "¿Qué herramienta se usa para visualizar la tokenización en la demo?"},
+    {"id": "f9", "type": "factual", "question": "¿Qué familia de modelos pertenece a Meta y bajo qué licencia de pesos suele distribuirse?"},
+    {"id": "f10", "type": "factual", "question": "¿Cuáles son los criterios de ingeniería para elegir un modelo?"},
+
+    {"id": "c1", "type": "comparison", "question": "Compara servicios gestionados por API y modelos open-weight.", "filters": {"topic": "ecosistema"}},
+    {"id": "c2", "type": "comparison", "question": "Compara GPT y Llama desde el criterio de control y despliegue.", "filters": {"model_family": ["gpt", "llama"]}},
+    {"id": "c3", "type": "comparison", "question": "Compara Gemini y Claude como familias de modelos.", "filters": {"model_family": ["gemini", "claude"]}},
+    {"id": "c4", "type": "comparison", "question": "Compara Mistral y DeepSeek.", "filters": {"model_family": ["mistral", "deepseek"]}},
+    {"id": "c5", "type": "comparison", "question": "Compara privacidad entre una API gestionada y un despliegue propio.", "filters": {"topic": "ecosistema"}},
+
+    {"id": "k1", "type": "concept", "question": "Explica self-attention usando una frase donde el contexto cambie el significado."},
+    {"id": "k2", "type": "concept", "question": "Diferencia tokenización, embedding y contextualización."},
+    {"id": "k3", "type": "concept", "question": "¿Por qué importa el contexto en la generación autoregresiva?"},
+    {"id": "k4", "type": "concept", "question": "Describe el pipeline texto a token a embedding a Transformer a siguiente token."},
+    {"id": "k5", "type": "concept", "question": "¿Qué es el Learning RAG de esta masterclass y para qué sirve?"},
+
+    {"id": "n1", "type": "no_evidence", "question": "¿Qué equipo ganó la Champions League en 2023?"},
+    {"id": "n2", "type": "no_evidence", "question": "¿Cuántos huesos tiene la jirafa?"},
+    {"id": "n3", "type": "no_evidence", "question": "¿Cuántos habitantes tiene Tokio?"},
+    {"id": "n4", "type": "no_evidence", "question": "¿Quién pintó la Mona Lisa?"},
+    {"id": "n5", "type": "no_evidence", "question": "¿Cuál es la densidad del helio?"}
+  ]
+}

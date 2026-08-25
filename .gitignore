@@ -1,0 +1,26 @@
+# Dependencias y entornos
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Secretos y configuración local
+.env
+.env.local
+*.key
+secrets.*
+
+# Índices generados (se reconstruyen con `python -m rag.ingestion.ingest`)
+rag/.index/
+
+# Build / empaquetado
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+
+# Editables de presentación exportados (opcional)
+slides/export/
