@@ -106,6 +106,35 @@ class TfidfEmbedder:
         return np.stack([self._vector(t) for t in texts])
 
 
+# Expansión de consulta: atenúa la fragilidad de fraseo del modo offline (TF-IDF).
+# Amplía la consulta con términos del curso emparentados para mejorar la recuperación
+# sin necesidad de embeddings semánticos ni APIs.
+SYNONYM_MAP = {
+    "mejor": ["criterios", "seleccion", "capacidad"],
+    "barato": ["coste"], "precio": ["coste"], "caro": ["coste"], "costoso": ["coste"],
+    "privado": ["privacidad"], "seguro": ["privacidad"], "confidencial": ["privacidad"],
+    "rapido": ["latencia"], "lento": ["latencia"],
+    "elige": ["criterios", "seleccion"], "elegir": ["criterios", "seleccion"],
+    "escoger": ["criterios", "seleccion"], "comparar": ["ecosistema"],
+    "diferencia": ["comparar", "ecosistema"],
+    "funciona": ["transformer", "pipeline", "anatomia"], "funcion": ["transformer", "pipeline", "anatomia"],
+    "pesos": ["open-weight"], "gratis": ["open-weight", "licencia"], "libre": ["open-weight", "licencia"],
+    "desplegar": ["despliegue"], "instalar": ["despliegue"],
+    "api": ["gestionada", "servicio"], "servicio": ["gestionada"],
+    "modelo": ["familia", "ecosistema"], "marca": ["familia"],
+    "util": ["rag", "asistente"], "sirves": ["rag", "utilidad"], "utilidad": ["rag", "util"],
+}
+
+
+def expand_query(text: str) -> str:
+    toks = TfidfEmbedder._tokenize(text)
+    extra = []
+    for t in toks:
+        if t in SYNONYM_MAP:
+            extra.extend(SYNONYM_MAP[t])
+    return (text + " " + " ".join(extra)).strip()
+
+
 def build_embedder(mode: str | None = None, index_dir: str | Path | None = None):
     settings = get_settings()
     mode = mode or settings.embedding_provider
