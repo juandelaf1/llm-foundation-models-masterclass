@@ -9,8 +9,10 @@ from __future__ import annotations
 
 from typing import List
 
+from rag.common import _split_sentences
 from rag.config import get_settings
 from rag.prompts.system import GROUNDED_OFFLINE_TEMPLATE, SYSTEM_PROMPT
+from rag.retrieval.embeddings import STOPWORDS, TfidfEmbedder
 
 
 def _as_str(value) -> str:
@@ -55,13 +57,41 @@ class OfflineGrounder:
                 "abstained": True,
                 "mode": "offline",
             }
-        answer = GROUNDED_OFFLINE_TEMPLATE.format(
-            context_block=_context_block(results),
-            sources_block=_sources_block(results),
-        )
+        # Síntesis extractiva: elige las frases más relevantes respecto a la consulta
+        # y las presenta como respuesta, con sus citas. No es "alucinación": todo
+        # proviene de los fragmentos recuperados.
+        q_tokens = {t for t in TfidfEmbedder._tokenize(query) if t not in STOPWORDS and len(t) > 1}
+        scored = []
+        for r in results:
+            for sent in _split_sentences(r["text"]):
+                s_tokens = set(TfidfEmbedder._tokenize(sent))
+                score = len(q_tokens & s_tokens)
+                if score > 0:
+                    scored.append((score, len(sent), sent, r))
+        scored.sort(key=lambda x: (-x[0], x[1]))
+
+        picked: List[str] = []
+        words = 0
+        sources = []
+        for _, ln, sent, r in scored:
+            if words + ln > 240:  # límite de extensión de la respuesta
+                break
+            picked.append(sent.strip())
+            words += ln
+            src = (r.get("title"), r.get("metadata", {}).get("source_url"))
+            if src not in sources:
+                sources.append(src)
+
+        if not picked:
+            picked = [results[0]["text"].strip()[:400]]
+            sources = [(r.get("title"), r.get("metadata", {}).get("source_url")) for r in results]
+
+        answer = " ".join(picked)
+        citations_block = "\n".join(f"- {t}: {u}" for t, u in sources)
+        answer += f"\n\nFuentes:\n{citations_block}"
         return {
             "answer": answer,
-            "citations": [{"title": r.get("title"), "url": r.get("metadata", {}).get("source_url")} for r in results],
+            "citations": [{"title": t, "url": u} for t, u in sources],
             "abstained": False,
             "mode": "offline",
         }

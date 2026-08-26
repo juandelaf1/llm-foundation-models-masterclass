@@ -14,8 +14,12 @@ el modo offline funcionan sin credenciales.
 from __future__ import annotations
 
 import os
+import sys
 
 import streamlit as st
+
+# Asegura que la raíz del proyecto esté en el path (streamlit no la añade).
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from rag.app.ask import ask
 from rag.config import get_settings
