@@ -14,17 +14,19 @@ source_url: https://bbycroft.net/llm
 
 ## Qué es
 
-[LLM visualization de Bbycroft](https://bbycroft.net/llm) es una animación interactiva que muestra, capa a capa, cómo un Transformer **pequeño** procesa texto: `input → embedding → attention → MLP → output`. Es la mejor forma de hacer *visible* lo que explican `03_transformer.md`, `04_self_attention.md` y `05_generacion_autoregresiva.md`.
+[LLM visualization de Bbycroft](https://bbycroft.net/llm) es una animación interactiva que muestra, capa a capa, cómo un Transformer **pequeño** procesa texto: `input → embedding → attention → MLP → output`. Es una maqueta educativa estilo GPT, **no es el interior literal de GPT, Gemini, Claude, Llama, Mistral o DeepSeek actuales**. Es la mejor forma de hacer *visible* lo que explican `03_transformer.md`, `04_self_attention.md` y `05_generacion_autoregresiva.md`.
 
-## Cómo usarla en la masterclass (5–10 min)
+## Cómo usarla en 4–5 minutos
 
-1. Abre https://bbycroft.net/llm
-2. Explora el modelo de ejemplo (un nano-Transformer entrenado para predecir el siguiente carácter/palabra).
+1. Abre https://bbycroft.net/llm (usa el modelo nano por defecto).
+2. Recorrido recomendado: **Embedding → Self-Attention → Q/K/V → causal masking → softmax → MLP → bloques repetidos → output**.
 3. Observa el flujo:
-   - **Input representation:** los tokens entran como embeddings.
-   - **Attention:** aparecen las líneas de atención entre tokens; cada token "mira" a otros.
-   - **MLP / bloques:** la información se transforma y pasa de capa en capa.
-   - **Output:** se genera la distribución sobre el siguiente token.
+   - **Embedding:** tokens como vectores.
+   - **Attention + Q/K/V + mask + softmax:** cada token mira atrás con pesos.
+   - **MLP:** pule cada posición.
+   - **Bloques repetidos → Output logits.**
+
+Qué mostrar: Q/K/V, mask, softmax, MLP, bloques. Qué NO mostrar si vas justo: heads múltiples. Si falla, usa captura del storyboard.
 
 ## Ejemplos recomendados para mostrar
 

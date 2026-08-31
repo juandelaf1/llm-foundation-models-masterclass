@@ -4,6 +4,10 @@ Cada incidente: Síntoma → Causa probable → Solución → Fallback.
 
 | Incidente | Síntoma | Causa probable | Solución | Fallback |
 |---|---|---|---|---|
+| Fallo Tiktokenizer | Web no carga | Caída tiktokenizer.vercel.app | Recargar | Captura Slide 10 + decir "tokens ≠ palabras, español gasta más" |
+| Fallo BBycroft | Web no carga | Caída bbycroft.net/llm | Recargar | Captura Slide 6 + narrar recorrido Embedding→Q/K/V→mask→softmax→MLP→output |
+| Sin internet | Nada carga | Red aula caída | — | Todo sigue: slides, notebooks y RAG offline funcionan |
+| Fallo RAG | `No module named rag` o índice vacío | No instalado o no indexado | `pip install -e . && python -m rag.ingestion.ingest` | Enseñar `references/sources.md` y `knowledge/` |
 | URL de demo caída | Tiktokenizer/BBycroft no cargan | Caída del servicio o red | Recargar; comprobar status | Capturas estáticas en `slides/` + narrar observación esperada |
 | Interfaz de demo cambiante | Los controles no están donde se indicó | La web externa se actualizó | Buscar el equivalente; adaptar al momento | Usar las capturas de `slides/` |
 | Dependencia Python incompatible | `pip install` falla | Versiones de numpy/llama-index | Crear venv; fijar versión en `pyproject.toml` | Modo offline solo requiere `numpy`+`python-dotenv` |

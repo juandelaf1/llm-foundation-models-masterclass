@@ -14,7 +14,7 @@ source_url: https://projector.tensorflow.org/
 
 ## Qué es
 
-[Embedding Projector de TensorFlow](https://projector.tensorflow.org/) es una herramienta de visualización que permite **explorar espacios vectoriales de embeddings** en 2D/3D (usando reducción de dimensionalidad como t-SNE, PCA o UMAP). Es una extensión **opcional**, fuera del núcleo de 60 minutos, para quien quiera profundizar en `02_embeddings.md`.
+[Embedding Projector de TensorFlow](https://projector.tensorflow.org/) es una herramienta que muestra embeddings proyectados a 2D/3D. Un embedding es un vector; para verlo proyectamos a 2D/3D con **PCA** (lineal), **t-SNE** o **UMAP** (no lineales). **Cosine similarity** mide ángulo (semántica), **euclidean** mide distancia recta. Es extensión **opcional**, fuera de los 60 min.
 
 ## Por qué merece la pena (si hay tiempo)
 
